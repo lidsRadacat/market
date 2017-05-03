@@ -1,0 +1,207 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="renderer" content="webkit|ie-comp|ie-stand" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="Bookmark" href="/favicon.ico" />
+		<link rel="Shortcut Icon" href="/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/H-ui.admin.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/Hui-iconfont/1.0.7/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/icheck/icheck.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin" />
+		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../../lib/webuploader/0.1.5/webuploader.css"/>
+	</head>
+<body>
+<div class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-product-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="hidden" id="product_id" name="product_id" th:value="${product.id}" />
+				<input type="text" id="product_name" name="product_name" class="input-text" th:value="${product.name}" placeholder="产品名称"></input>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品规格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_length" id="product_length" placeholder="输入长度" th:value="${product.length}" class="input-text" style=" width:25%"/>
+				MM
+				<input type="text" name="product_widht" id="product_weight" placeholder="输入宽度" th:value="${product.width}" class="input-text" style=" width:25%"/>
+				MM
+				<input type="text" name="product_height" id="product_height" placeholder="输入高度" th:value="${product.height}" class="input-text" style=" width:25%"/>
+				MM </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产地：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_place_origin" id="product_place_origin" placeholder="" th:value="${product.placeOrigin}" class="input-text" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">所属供应商：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_supplier" id="product_supplier" placeholder="" th:value="${product.supplier}" class="input-text" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">价格计算单位：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box">
+					<select class="select" id="product_uom" name="product_uom" required="required" title="请选择一个计量单位！">
+						<option th:value="${product.uom}" th:text="${product.uom}">请选择</option>
+						<option value="件">件</option>
+						<option value="近">斤</option>
+						<option value="千克">千克</option>
+						<option value="吨">吨</option>
+						<option value="套">套</option>
+					</select>
+				</span> 
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品重量：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_weight" id="product_weight" placeholder="" th:value="${product.weight}" class="input-text" style="width:90%" />
+				kg
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品展示价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_price" id="product_price" placeholder="" th:value="${product.price}" class="input-text" style="width:90%" />
+				元
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">市场价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_market_price" id="product_market_price" placeholder="" th:value="${product.marketPrice}" class="input-text" style="width:90%" />
+				元
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">成本价格：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_cost_price" id="product_cost_price" placeholder="" th:value="${product.costPrice}" class="input-text" style="width:90%" />
+				元
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">销售开始时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input th:value="${#dates.format(product.startTime,'yyyy-MM-dd HH:mm:ss')}" name="product_start_time" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:180px;" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">销售结束时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input th:value="${#dates.format(product.endTime,'yyyy-MM-dd HH:mm:ss')}" name="product_end_time" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'datemin\')}'})" id="datemax" class="input-text Wdate" style="width:180px;" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">类型：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box">
+					<select class="select" id="product_type" name="product_type" required="required" title="请选择一个产品类型！">
+						<option th:value="${product.type}" th:text="${product.type}">请选择</option>
+						<option value="服务">服务</option>
+						<option value="产品">产品</option>
+						<option value="促销">促销</option>
+					</select>
+				</span>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">颜色：</label>
+			<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box">
+					<select id="product_color" name="product_color" class="select" required="required" title="请选择一个产品颜色！">
+						<option th:value="${product.color}" th:text="${product.color}">请选择</option>
+						<option value="黄色">黄色</option>
+						<option value="红色">红色</option>
+						<option value="绿色">绿色</option>
+						<option value="黑色">黑色</option>
+						<option value="白色">白色</option>
+						<option value="灰色">灰色</option>
+						<option value="粉色">粉色</option>
+						<option value="土豪金">土豪金</option>
+					</select>
+				</span> 
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品关属性：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_attribute" id="product_attribute" placeholder="多个属性用英文逗号隔开" th:value="${product.attribute}" class="input-text" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品关键字：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" name="product_keyword" id="product_keyword" placeholder="多个关键字用英文逗号隔开，限10个关键字" th:value="${product.keyword}" class="input-text" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品摘要：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea th:field="${product.comment}" id="product_comment" name="product_comment" cols="" rows="" class="textarea"  placeholder="说点什么..." datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">产品图片：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<img src="../../static/h-ui/images/loading-b.gif" th:src="${product.imageUrl}" class="radius"/>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">图片上传：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<div class="uploader-list-container">
+					<div class="queueList">
+						<div id="dndArea" class="placeholder">
+							<div id="filePicker-2"></div>
+							<p>或将照片拖到这里，单次最多可选10张</p>
+						</div>
+					</div>
+					<div class="statusBar" style="display:none;">
+						<div class="progress"> <span class="text">0%</span> <span class="percentage"></span> </div>
+						<div class="info"></div>
+						<div class="btns">
+							<div id="filePicker2"></div>
+							<div class="uploadBtn">开始上传</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button id="product-edit" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+				<!-- <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button> -->
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="../../lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="../../lib/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="../../lib/jquery.validation/1.14.0/jquery.validate.min.js"></script> 
+<script type="text/javascript" src="../../lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="../../lib/jquery.validation/1.14.0/messages_zh.min.js"></script> 
+<script type="text/javascript" src="../../static/h-ui/js/H-ui.js"></script> 
+<script type="text/javascript" src="../../static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="../../lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../../lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="../../js/product-edit.js"></script>
+</body>
+</html>
