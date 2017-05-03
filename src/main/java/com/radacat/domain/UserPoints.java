@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,7 @@ public class UserPoints {
      *
      * @mbggenerated Sat Apr 15 12:44:39 CST 2017
      */
-	@Column
+	@Id
     private Long id;
 
     /**

@@ -16,4 +16,7 @@ public interface ProductService {
 	void delete(Product product);
 	void update(Product product);
 	List<Product> findAllList();
+	Product find(Long id);
+	void stop(Product product);
+	void start(Product product);
 }

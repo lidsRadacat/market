@@ -11,20 +11,15 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.radacat.api.RestApi;
 import com.radacat.api.StatusCode;
 import com.radacat.service.UserService;
 import com.radacat.utils.LoggerUtil;
-
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 
 
 /**
@@ -33,27 +28,20 @@ import io.swagger.annotations.ApiOperation;
  * @date: 2017年4月15日 下午1:59:18
  * @version: V1.0
  */
-@Controller
+@RestController
 public class ShiroContrller {
 
 	@Autowired
 	UserService userService;
 	
-	@ApiOperation(value="用户登录", notes="重定向")
-	@RequestMapping(value="/login",method=RequestMethod.GET,produces="application/json")
-	public String loginForm(){
-		return "user/login";
-	}
-	
-	@ApiOperation(value="用户登录", notes="")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "username", value = "用户手机号", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "password", value = "用户密码", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "rememberMe", value = "是否记住登录", required = false, dataType = "String"),
-            @ApiImplicitParam(name = "validate", value="图片验证码",required = true,dataType = "String")
-    })
-	@RequestMapping(value="/login",method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
-	@ResponseBody
+//	@ApiOperation(value="用户登录", notes="")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "username", value = "用户手机号", required = true, dataType = "String"),
+//            @ApiImplicitParam(name = "password", value = "用户密码", required = true, dataType = "String"),
+//            @ApiImplicitParam(name = "rememberMe", value = "是否记住登录", required = false, dataType = "String"),
+//            @ApiImplicitParam(name = "validate", value="图片验证码",required = true,dataType = "String")
+//    })
+	@RequestMapping(value="/api/login",method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
 	public RestApi<String> login(@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "validate", required = true) String validate,
@@ -108,7 +96,7 @@ public class ShiroContrller {
         }  
 	}
 	
-	@ApiOperation(value="用户退出", notes="")
+//	@ApiOperation(value="用户退出", notes="")
 	@RequestMapping(value="/logout",method=RequestMethod.GET)  
     public RestApi<String> logout(){ 
 		//使用权限管理工具进行用户的退出，跳出登录，给出提示信息
@@ -116,7 +104,7 @@ public class ShiroContrller {
         return new RestApi<>(StatusCode._20000.getMessage());
     }
 	
-	@ApiOperation(value="用户没有权限", notes="")
+//	@ApiOperation(value="用户没有权限", notes="")
 	@RequestMapping("/403")
 	public RestApi<String> unauthorizedRole(){
 		LoggerUtil.info("------没有权限-------");

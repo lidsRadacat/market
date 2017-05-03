@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
-import com.radacat.domain.Area;
 import com.radacat.domain.Partner;
-import com.radacat.mapper.AreaMapper;
 import com.radacat.mapper.PartnerMapper;
 
 /**

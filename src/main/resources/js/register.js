@@ -1,9 +1,9 @@
 $(function() {
 	// 发送验证码按钮
 	var sendMobileCode = document.getElementById("sendMobileCode");
-	sendMobileCode.onclick = function() {
+	$("#sendMobileCode").click(function() {
 		$.ajax({
-			url: "mobile?username="+$("#username").val(),
+			url: "api/mobile?username="+$("#username").val(),
 			type: "get",
 			dataType: "json",
 			contentType: "application/json",
@@ -34,12 +34,12 @@ $(function() {
 				sendMobileCode.disabled = false;
 			}
 		}, 1000);
-	};
+	});
 
 	// 登录按钮
-	$("#login").onclick = function() {
+	$("#login").click(function() {
 		location.href = "login.html";
-	};
+	});
 
 	$("#form-user-register").validate({
 		rules: {
@@ -67,7 +67,7 @@ $(function() {
 		submitHandler: function(form) {
 			//进行ajax传值
 			$.ajax({
-				url: "user",
+				url: "api/user",
 				type: "post",
 				dataType: "json",
 				contentType: "application/x-www-form-urlencoded",
@@ -76,13 +76,22 @@ $(function() {
 					password: $("#password").val(),
 					mobilecode: $("#mobilecode").val(),
 				},
-				success : function(data) {
+				success: function(data) {
 					//要执行的代码
 					if(data.code === '20000'){
-						layer.msg('注册成功!', {
-							icon: 1,
-							time: 1000
-						});						
+						var second = 3;
+						var Timer = window.setInterval(function() {
+							layer.msg('注册成功! '+second+'后跳转到登录页面......', {
+								icon: 1,
+								time: 1000
+							});
+							second -= 1;
+							if (second == 0) {
+								clearInterval(Timer);
+								location.href = "login";								
+							}
+						}, 1000);
+						alert("注册成功");
 					}else{
 						alert("未知异常")
 					}
@@ -91,6 +100,7 @@ $(function() {
 					alert(errs.responseText);
                 }
 			});
+			return false;
 		},
 		invalidHandler: function(form, validator) {return false;}
 	});

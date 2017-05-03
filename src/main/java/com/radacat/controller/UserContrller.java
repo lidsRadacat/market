@@ -41,7 +41,7 @@ public class UserContrller {
             @ApiImplicitParam(name = "password", value = "用户密码", required = true, dataType = "String"),
             @ApiImplicitParam(name = "mobilecode", value = "手机验证码", required = true, dataType = "String")
     })
-    @RequestMapping(value="/user", method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
+    @RequestMapping(value="/api/user", method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
     public RestApi<User> insertUser(HttpServletRequest request,
     		@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password,
@@ -59,7 +59,7 @@ public class UserContrller {
 	
 	@ApiOperation(value="发送手机短信", notes="")
     @ApiImplicitParam(name = "username", value = "用户手机号", required = true, dataType = "String")
-    @RequestMapping(value="/mobile", method=RequestMethod.GET,consumes="application/json",produces="application/json")
+    @RequestMapping(value="/api/mobile", method=RequestMethod.GET,consumes="application/json",produces="application/json")
 	public RestApi<String> sendMobileCode(HttpServletRequest request,
     		@RequestParam(value = "username", required = true) String username) throws MyJsonCheckedException{
 		mobileValidateCodeService.sendValidateCode(username);
@@ -71,7 +71,7 @@ public class UserContrller {
             @ApiImplicitParam(name = "username", value = "用户手机号", required = true, dataType = "String"),
             @ApiImplicitParam(name = "mobilecode", value = "手机验证码", required = true, dataType = "String")
     })
-    @RequestMapping(value="/mobile", method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
+    @RequestMapping(value="/api/mobile", method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
 	public RestApi<String> validateMobileCode(HttpServletRequest request,
     		@RequestParam(value = "username", required = true) String username,
     		@RequestParam(value = "mobilecode", required = true) String mobileCode){

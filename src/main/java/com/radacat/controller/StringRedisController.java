@@ -67,7 +67,7 @@ public class StringRedisController {
     @RequestMapping("setP")
     public String setProduct(){
     	Product product = new Product();
-    	product.setId(1);
+    	product.setId(1L);
     	valOps.set(product.getId().toString(), product);
     	return "OK";
     }

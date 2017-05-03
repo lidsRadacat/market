@@ -6,11 +6,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.type.descriptor.sql.CharTypeDescriptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.radacat.service.PartnerService;
+import com.radacat.service.ProductService;
 import com.radacat.utils.authcode.Captcha;
 import com.radacat.utils.authcode.SpecCaptcha;
+
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 文件名: MainController.java
@@ -23,6 +31,13 @@ import com.radacat.utils.authcode.SpecCaptcha;
  */
 @Controller
 public class MainController {
+	
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	PartnerService partnerService;
+	
 	@RequestMapping(value = {"/","/index"})
 	public String index() {
 		return "index";
@@ -54,9 +69,35 @@ public class MainController {
 		return "user/register";
 	}
 	
+	@RequestMapping(value="/login")
+	public String loginForm(){
+		return "user/login";
+	}
+	
 	@RequestMapping("/chart")
 	public String getChart(){
-		
 		return "chart/chinaCitySales1";
+	}
+	
+	@RequestMapping("/product-add")
+	public String addProduct(){
+		return "product/product-add";
+	}
+	
+	@RequestMapping("/product-edit/{id}")
+	public String editProduct(Model model,@PathVariable Long id){
+		model.addAttribute("product",productService.find(id));
+		return "product/product-edit";
+	}
+
+	@RequestMapping("/partner-add")
+	public String addPartner(){
+		return "partner/partner-add";
+	}
+	
+	@RequestMapping("/partner-edit/{id}")
+	public String editPartner(Model model,@PathVariable Long id){
+		model.addAttribute("product",partnerService.find(id));
+		return "partner/partner-edit";
 	}
 }

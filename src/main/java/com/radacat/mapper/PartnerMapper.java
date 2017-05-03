@@ -56,7 +56,9 @@ public interface PartnerMapper {
      */
     int updateByPrimaryKey(Partner partner);
     
-    
-    @Select("select * from tb_partner where active='t' and type='1'")
+//    @Select("select * from tb_partner where active='t' and type='1'")
     List<Partner> findAllAdmin();
+    
+//    @Select("select * from tb_partner where active='t' and type='3'")
+    List<Partner> findAllPartner();
 }

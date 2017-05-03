@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,7 @@ import com.radacat.service.ProductService;
  */
 @Controller
 @RequestMapping(value="/product")
-public class ProductController {
+public class ProductController extends BaseConstructor{
 	
 	@Autowired
 	ProductService productService;
@@ -39,21 +40,52 @@ public class ProductController {
 		return "/product/product-list";
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.POST)
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public String getProduct(Model model,@PathVariable Long id){
+		model.addAttribute("product",productService.find(id));
+		return "/product/product-show";
+	}
+	
+	@RequestMapping(value="",method=RequestMethod.POST,consumes="application/json",produces="application/json")
 	@ResponseBody
-	public RestApi<String> addProduct(@RequestBody Product product){
+	public RestApi<String> addProduct(@RequestBody Product product,HttpServletRequest request){
+		System.out.println(product);
+		product.setCreateUid(getUid(request));
+		productService.add(product);
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.DELETE)
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
-	public RestApi<String> deleteProduct(@RequestBody Product product){
+	public RestApi<String> deleteProduct(@PathVariable Long id){
+		productService.delete(new Product(id));
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.PUT)
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	@ResponseBody
-	public RestApi<String> updateProduct(@RequestBody Product product){
+	public RestApi<String> updateProduct(@PathVariable Long id,
+			@RequestBody Product product){
+		product.setId(id);
+		productService.update(product);
+		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping(value="/stop/{id}",method=RequestMethod.PATCH)
+	@ResponseBody
+	public RestApi<String> stopProduct(@PathVariable Long id){
+		Product product = new Product();
+		product.setId(id);
+		productService.stop(product);
+		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping(value="/start/{id}",method=RequestMethod.PATCH)
+	@ResponseBody
+	public RestApi<String> startProduct(@PathVariable Long id){
+		Product product = new Product();
+		product.setId(id);
+		productService.start(product);
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 }

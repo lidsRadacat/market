@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE HTML>
 <html>
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="renderer" content="webkit|ie-comp|ie-stand" />
@@ -39,7 +38,7 @@
 		<div class="header"></div>
 		<div class="loginWraper">
 			<div id="loginform" class="loginBox">
-				<form id="form-user-login" class="form form-horizontal" method="post" action="">
+				<form id="form-user-login" name="form-user-login" class="form form-horizontal" action="api/login" method="post">
 					<div class="row cl">
 						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 						<div class="formControls col-xs-8">
@@ -63,15 +62,15 @@
 					<div class="row cl">
 						<div class="formControls col-xs-8 col-xs-offset-3">
 							<label for="remeberMe">
-            					<input type="checkbox" id="remeberMe" name="remeberMe" value="true"></input>使我保持登录状态
+            					<input type="checkbox" id="remeberMe" name="remeberMe" value="true" />使我保持登录状态
           					</label> &nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="">忘记密码？</a>
 						</div>
 					</div>
 					<div class="row cl">
 						<div class="formControls col-xs-8 col-xs-offset-3">
-							<input id="login" name="login" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"></input>
-							<input id="register" type="button" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;"></input>
+							<input id="login-button" name="login-button" type="button" onclick="login()" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;" />
+							<input id="register" type="button" class="btn btn-default radius size-L" value="&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;册&nbsp;" />
 						</div>
 					</div>
 				</form>
@@ -79,6 +78,7 @@
 		</div>
 		<div class="footer">北京蓝涟科技有限责任公司</div>
 		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/jquery/1.9.1/jquery.js"></script>
 		<script type="text/javascript" src="../../lib/layer/2.1/layer.js"></script>
 		<script type="text/javascript" src="../../lib/icheck/jquery.icheck.min.js"></script>
 		<script type="text/javascript" src="../../static/h-ui/js/H-ui.js"></script>

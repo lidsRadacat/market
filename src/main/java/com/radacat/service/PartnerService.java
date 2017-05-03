@@ -1,5 +1,7 @@
 package com.radacat.service;
 
+import java.util.List;
+
 import com.radacat.domain.Partner;
 
 /**
@@ -11,4 +13,8 @@ import com.radacat.domain.Partner;
 public interface PartnerService {
 	
 	public void add(Partner partner);
+	void delete(Partner partner);
+	void update(Partner partner);
+	List<Partner> findAllList(int pageNum, int pageSize);
+	Partner find(Long id);
 }
