@@ -273,4 +273,11 @@ public class Role {
     public void setWriteDate(Date writeDate) {
         this.writeDate = writeDate;
     }
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", active=" + active + ", name=" + name + ", comment=" + comment + ", createUid="
+				+ createUid + ", writeUid=" + writeUid + ", createDate=" + createDate + ", writeDate=" + writeDate
+				+ "]";
+	}
 }

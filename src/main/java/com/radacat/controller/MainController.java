@@ -5,20 +5,19 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.type.descriptor.sql.CharTypeDescriptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.radacat.domain.Partner;
+import com.radacat.service.AdminService;
+import com.radacat.service.AgencyService;
 import com.radacat.service.PartnerService;
 import com.radacat.service.ProductService;
 import com.radacat.utils.authcode.Captcha;
 import com.radacat.utils.authcode.SpecCaptcha;
-
-import io.swagger.annotations.ApiOperation;
 
 /**
  * 文件名: MainController.java
@@ -37,6 +36,12 @@ public class MainController {
 	
 	@Autowired
 	PartnerService partnerService;
+	
+	@Autowired
+	AgencyService agencyService;
+	
+	@Autowired
+	AdminService adminService;
 	
 	@RequestMapping(value = {"/","/index"})
 	public String index() {
@@ -99,5 +104,27 @@ public class MainController {
 	public String editPartner(Model model,@PathVariable Long id){
 		model.addAttribute("product",partnerService.find(id));
 		return "partner/partner-edit";
+	}
+	
+	@RequestMapping("/agency-add")
+	public String addAgency(){
+		return "partner/agency-add";
+	}
+	
+	@RequestMapping("/agency-edit/{id}")
+	public String editAgency(Model model,@PathVariable Long id){
+		model.addAttribute("agency",agencyService.find(id));
+		return "partner/agency-edit";
+	}
+	
+	@RequestMapping("/admin-add")
+	public String addAdmin(){
+		return "admin/admin-add";
+	}
+	
+	@RequestMapping("/admin-edit/{id}")
+	public String editAdmin(Model model,@PathVariable Long id){
+		model.addAttribute("admin",adminService.find(new Partner(id)));
+		return "admin/admin-edit";
 	}
 }

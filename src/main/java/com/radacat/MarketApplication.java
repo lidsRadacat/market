@@ -30,7 +30,6 @@ public class MarketApplication {
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
-
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mapper/*.xml"));

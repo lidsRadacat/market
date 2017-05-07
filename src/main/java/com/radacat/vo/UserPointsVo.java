@@ -13,4 +13,17 @@ import com.radacat.domain.HistoryPoint;
 public class UserPointsVo {
 	private UserPointsVo userPointsVo;
 	private List<HistoryPoint> historyPoints;
+	public UserPointsVo getUserPointsVo() {
+		return userPointsVo;
+	}
+	public void setUserPointsVo(UserPointsVo userPointsVo) {
+		this.userPointsVo = userPointsVo;
+	}
+	public List<HistoryPoint> getHistoryPoints() {
+		return historyPoints;
+	}
+	public void setHistoryPoints(List<HistoryPoint> historyPoints) {
+		this.historyPoints = historyPoints;
+	}
+	
 }

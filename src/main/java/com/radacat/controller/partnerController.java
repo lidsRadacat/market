@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.radacat.api.RestApi;
 import com.radacat.api.StatusCode;
 import com.radacat.domain.Partner;
-import com.radacat.domain.Product;
 import com.radacat.service.PartnerService;
 
 /**
@@ -36,17 +35,15 @@ public class partnerController extends BaseConstructor{
 	public String getPartnerList(@PathVariable int pageNum,
 			@PathVariable int pageSize,Model model){
 		List<Partner> partners = partnerService.findAllList(pageNum, pageSize);
-		System.out.println(partners.get(1));
-		System.out.println(partners.size());
 		model.addAttribute("partners", partners);
 		model.addAttribute("count",partners.size());
-		return "/partner/partner-list";
+		return "partner/partner-list";
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public String getPartner(Model model,@PathVariable Long id){
 		model.addAttribute("partner",partnerService.find(id));
-		return "/partner/partner-show";
+		return "partner/partner-show";
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST,consumes="application/json",produces="application/json")

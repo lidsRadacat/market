@@ -125,4 +125,10 @@ public class Area {
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
+
+	@Override
+	public String toString() {
+		return "Area [id=" + id + ", province=" + province + ", city=" + city + ", county=" + county + ", countryId="
+				+ countryId + ", longitude=" + longitude + ", latitude=" + latitude + "]";
+	}
 }

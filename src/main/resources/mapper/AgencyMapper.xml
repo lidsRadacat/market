@@ -16,8 +16,8 @@
     <result column="discount" property="discount" jdbcType="DECIMAL" />
     <result column="register_count" property="registerCount" jdbcType="INTEGER" />
     <result column="area_id" property="areaId" jdbcType="INTEGER" />
-    <result column="create_uid" property="createUid" jdbcType="INTEGER" />
-    <result column="write_uid" property="writeUid" jdbcType="INTEGER" />
+    <result column="create_uid" property="createUid" jdbcType="BIGINT" />
+    <result column="write_uid" property="writeUid" jdbcType="BIGINT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="write_date" property="writeDate" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -41,6 +41,14 @@
     from tb_agency
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <select id="findAllAgency" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_agency
+    where active = 't'
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     <!--
       WARNING - @mbggenerated

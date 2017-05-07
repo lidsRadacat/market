@@ -21,4 +21,34 @@ public class UserVo {
 	private List<Permission> permissions;
 	private Address address;
 	private Points points;
+	public Partner getPartner() {
+		return partner;
+	}
+	public void setPartner(Partner partner) {
+		this.partner = partner;
+	}
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public Points getPoints() {
+		return points;
+	}
+	public void setPoints(Points points) {
+		this.points = points;
+	}
 }

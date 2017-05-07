@@ -52,7 +52,6 @@ public class PartnerServiceImpl implements PartnerService {
 	public List<Partner> findAllList(int pageNum, int pageSize) {
 //		PageHelper.startPage(pageNum,pageSize);
 		List<Partner> partners = partnerMapper.findAllPartner();
-		System.out.println(partners);
 		return partners;
 	}
 

@@ -32,6 +32,7 @@
     where rid = #{rid,jdbcType=INTEGER}
       and uid = #{uid,jdbcType=BIGINT}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="com.radacat.domain.UserRoleKey" >
     <!--
       WARNING - @mbggenerated
@@ -119,4 +120,45 @@
     where rid = #{rid,jdbcType=INTEGER}
       and uid = #{uid,jdbcType=BIGINT}
   </update>
+  <!-- 查询角色权限 -->
+  <resultMap type="com.radacat.dto.UserRolePermission" id="rolePermission">
+  		<id column="rprid" property="uid" jdbcType="INTEGER"/>
+	   	<association property="role" javaType="com.radacat.domain.Role">
+	   		 <id column="rid" property="id" jdbcType="INTEGER"/>
+	    	 <result column="rname" property="name" jdbcType="VARCHAR" />
+	    	 <result column="rcomment" property="comment" jdbcType="VARCHAR" />
+	    </association>
+	    <collection property="permissions" ofType="com.radacat.domain.Permission">
+	    	 <id column="pid" property="id" jdbcType="INTEGER" />
+	    	 <result column="pcomment" property="comment" jdbcType="VARCHAR" />
+	    	 <result column="pname" property="name" jdbcType="VARCHAR" />	    	 
+	    	 <result column="purl" property="url" jdbcType="VARCHAR" />	    	 
+	    </collection>
+  </resultMap>
+  <select id="findUserRolePermission" resultMap="rolePermission" parameterType="java.lang.Long">
+  		SELECT
+  				rop.rid as rprid,
+				r.`name` as rname,
+				r.`comment` as rcomment,
+				p.id as pid,
+				p.`comment`as pcomment,
+				p.`name` as pname,
+				p.url as purl
+		FROM
+				tb_role r,
+				tb_role_permission rop,
+				tb_permission p 
+		WHERE
+			rop.rid = r.id
+		AND
+			p.id = rop.pid
+		AND
+			r.id = (
+				SELECT
+					ur.rid
+				FROM
+					tb_user_role ur
+				where ur.uid = #{id,jdbcType=BIGINT}
+			)
+  </select>
 </mapper>

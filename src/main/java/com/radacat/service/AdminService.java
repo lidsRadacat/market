@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.radacat.domain.Area;
 import com.radacat.domain.Partner;
+import com.radacat.vo.AdminVo;
 
 /**
  * @Description: TODO
@@ -13,8 +14,10 @@ import com.radacat.domain.Partner;
  */
 public interface AdminService {
 	void add(Partner partner);
+	void add(AdminVo adminVo);
 	void delete(Partner partner);
 	void update(Partner partner);
-	Partner find(Partner partner);
-	List<Partner> findList(int pageNum, int pageSize);
+	void update(AdminVo adminVo);
+	AdminVo find(Partner partner);
+	List<AdminVo> findList(int pageNum, int pageSize);
 }

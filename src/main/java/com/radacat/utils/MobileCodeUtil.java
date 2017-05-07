@@ -22,14 +22,13 @@ import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 */
 public class MobileCodeUtil {
 	public static final String URL = "http://gw.api.taobao.com/router/rest";
-	public static final String APPKEYT = "23731600";//我的appkey
-	public static final String SECRET = "480ccd6d174f4ed1b9b3b62951c4f99b";//App Secret
+	public static final String APPKEYT = "23783317";//我的appkey
+	public static final String SECRET = "693e543b4f66bef183678a1eb69843c0";//App Secret
 	public static final String EXTEND = "123456";//用户编号
 	public static final String SMSTYPE = "normal";//默认短信格式
-	public static final String SMSFREESIGNNAME = "王东阳";//短信签名名称
-	public static final String SMSPARAMSTRING1 = "name";//模版内容填的值
-	public static final String SMSPARAMSTRING2 = "auth_code";//模版内容填的值
-	public static final String SMSTEMPLATECODE = "SMS_59780128";//模板id
+	public static final String SMSFREESIGNNAME = "胡虹";//短信签名名称
+	public static final String SMSPARAMSTRING = "authcode";//模版内容填的值
+	public static final String SMSTEMPLATECODE = "SMS_63860763";//模板id
 	
 	public static String sendAuthCode(String mobile) throws ApiException {
 		String authCode = getRandom();
@@ -39,8 +38,8 @@ public class MobileCodeUtil {
 		req.setExtend(EXTEND);//用户的编号
 		req.setSmsType(SMSTYPE);//默认短信格式
 		req.setSmsFreeSignName(SMSFREESIGNNAME);//短信签名名称
-//		req.setSmsParamString("{\""+SMSPARAMSTRING+"\":" + authCode + "}");//模版内容填的值${authCode}
-		req.setSmsParamString("{\""+SMSPARAMSTRING1+"\":" + mobile + "\","+"\""+SMSPARAMSTRING2+"\":" + authCode + "}");//模版内容填的值${authCode}
+		req.setSmsParamString("{\""+SMSPARAMSTRING+"\":" + authCode + "}");//模版内容填的值${authCode}
+//		req.setSmsParamString("{\""+SMSPARAMSTRING1+"\":" + mobile + "\","+"\""+SMSPARAMSTRING2+"\":" + authCode + "}");//模版内容填的值${authCode}
 		req.setRecNum(mobile);//对方手机号
 		req.setSmsTemplateCode(SMSTEMPLATECODE);//模版id
 		AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);

@@ -37,13 +37,13 @@ public class ProductController extends BaseConstructor{
 		List<Product> products = productService.findAllList();
 		model.addAttribute("products", products);
 		model.addAttribute("count", products.size());
-		return "/product/product-list";
+		return "product/product-list";
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public String getProduct(Model model,@PathVariable Long id){
 		model.addAttribute("product",productService.find(id));
-		return "/product/product-show";
+		return "product/product-show";
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST,consumes="application/json",produces="application/json")

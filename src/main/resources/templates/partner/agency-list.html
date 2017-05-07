@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html  xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="renderer" content="webkit|ie-comp|ie-stand" />
@@ -17,16 +16,16 @@
 	</head>
 
 	<body>
-		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 经销商管理中心 <span class="c-gray en">&gt;</span> 经销商管理
+		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 经销商管理中心 <span class="c-gray en">&gt;</span> 经销商提货管理
 			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
 			<div class="text-c"> 日期范围：
 				<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;" /> -
 				<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;" />
-				<input type="text" class="input-text" style="width:250px" placeholder="输入客户名称" id="" name="" />
-				<button type="submit" class="btn btn-success radius" id="" name="" >
-					<i class="Hui-iconfont">&#xe665;</i> 搜索
+				<input type="text" class="input-text" style="width:250px" placeholder="输入客户名称、电话、邮箱" id="" name="" />
+				<button type="submit" class="btn btn-success radius" id="" name="">
+					<i class="Hui-iconfont">&#xe665;</i> 搜客户
 				</button>
 			</div>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -34,9 +33,9 @@
 					<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 						<i class="Hui-iconfont">&#xe6e2;</i> 
 						批量删除
-					</a>
-					<a class="btn btn-primary radius" onclick="partner_add('添加经销商','/partner-add','800','500')" href="javascript:;">
-						<i class="Hui-iconfont">&#xe600;</i> 添加经销商
+					</a> 
+					<a class="btn btn-primary radius" onclick="agency_add('添加提货记录','/agency-add','800','500')" href="javascript:;">
+						<i class="Hui-iconfont">&#xe600;</i> 添加提货记录
 					</a>
 				</span>
 				<span class="r">共有数据：
@@ -44,42 +43,39 @@
 				</span>
 			</div>
 			<div class="mt-20">
-				<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<table class="table table-border table-bordered table-hover table-sort">
 					<thead>
 						<tr class="text-c">
 							<th width="25"><input type="checkbox" name="" value="" /></th>
-							<th width="100">ID</th>
-							<th width="80">用户名</th>
-							<th width="40">性别</th>
-							<th width="90">手机</th>
-							<th width="150">邮箱</th>
-							<th width="300">地址</th>
-							<th width="130">注册时间</th>
-							<th width="100">QQ</th>
-							<th width="100">操作</th>
+							<th width="70">ID</th>
+							<th width="80">提货人</th>
+							<th width="80">提货数量</th>
+							<th width="90">提货产品单价</th>
+							<th width="150">提货商品名</th>
+							<th width="40">折扣率</th>
+							<th width="130">提货时间</th>
+							<th width="280">所属地区</th>
+							<th width="80">操作</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
-						<tr class="text-c" th:each="partner,stat : ${partners}">
-							<td><input type="checkbox" th:value="${partner.id}" name="" /></td>
-							<td th:text="${partner.id}">1</td>
-							<td class="text-c">
-								<a style="cursor:pointer" class="text-primary btn btn-success-outline radius" th:onClick="'javascript:partner_show(\''+${partner.name}+'\',\''+${partner.id}+'\');'" th:text="${partner.name}">张三</a>
+						<tr class="text-c" th:each="agencyVo,stat : ${agencyVos}">
+							<td><input type="checkbox" th:value="${agencyVo.id}" name="" /></td>
+							<td th:text="${agencyVo.id}">1</td>
+							<td>
+								<a style="cursor:pointer" class="text-primary btn btn-success-outline radius" th:onClick="'javascript:partner_show(\''+${agencyVo.partner.name}+'\',\''+${agencyVo.partner.id}+'\');'" th:text="${agencyVo.partner.name}">张三</a>
 							</td>
-							<td th:switch="${partner.gender}">
-								<span th:case='1'>男</span>
-								<span th:case='2'>女</span>
-							</td>
-							<td th:text="${partner.mobile}">13000000000</td>
-							<td th:text="${partner.email}">admin@mail.com</td>
-							<td th:text="${partner.street}">北京市 海淀区</td>
-							<td th:data="${#dates.format(partner.createDate, 'yyyy年MMM月dd日  HH:mm:ss')}">2014-6-11 11:11:42</td>
-							<td th:text="${partner.qq}">1014875985</td>
+							<td><span th:text="${agencyVo.pickingCount}">10000</span>件</td>
+							<td><span th:text="${agencyVo.pickingPrice}">10000</span>元</td>
+							<td th:text="${agencyVo.product.name}">GCat</td>
+							<td th:text="${agencyVo.discount}">75%</td>
+							<td th:data="${#dates.format(agencyVo.createDate, 'yyyy年MMM月dd日  HH:mm:ss')}">2014-6-11 11:11:42</td>
+							<td th:text="${agencyVo.addressVo.country}+${agencyVo.addressVo.province}+${agencyVo.addressVo.city}+${agencyVo.addressVo.county}">浙江省杭州市余杭区</td>
 							<td class="td-manage">
-								<a title="编辑" href="javascript:;" th:onClick="'javascript:partner_edit(\''+${partner.name}+'\',\''+${partner.id}+'\');'" class="ml-5" style="text-decoration:none">
+								<a title="编辑" href="javascript:;" th:onClick="'javascript:agency_edit(\''+${agencyVo.partner.name}+'\',\''+${agencyVo.id}+'\');'" class="ml-5" style="text-decoration:none">
 									<i class="Hui-iconfont">&#xe6df;</i>
 								</a>
-								<a title="删除" href="javascript:;" th:onClick="'javascript:partner_del(this,\''+${partner.id}+'\');'" class="ml-5" style="text-decoration:none">
+								<a title="删除" href="javascript:;" th:onClick="'javascript:agency_del(this,\''+${agencyVo.id}+'\');'" class="ml-5" style="text-decoration:none">
 									<i class="Hui-iconfont">&#xe6e2;</i>
 								</a>
 							</td>
@@ -96,45 +92,46 @@
 		<script type="text/javascript" src="../../static/h-ui/js/H-ui.js"></script>
 		<script type="text/javascript" src="../../static/h-ui.admin/js/H-ui.admin.js"></script>
 		<script type="text/javascript">
-			$('.table-sort').dataTable({
-				"aaSorting": [
-					[1, "desc"]
-				], //默认第几个排序
-				"bStateSave": true, //状态保存
-				"aoColumnDefs": [
-					//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-					{
-						"orderable": false,
-						"aTargets": [0, 9]
-					} // 制定列不参与排序
-				]
+			$(function() {
+				$('.table-sort').dataTable({
+					"aaSorting": [
+						[1, "desc"]
+					], //默认第几个排序
+					"bStateSave": true, //状态保存
+					"aoColumnDefs": [
+						//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+						{
+							"orderable": false,
+							"aTargets": [0, 9]
+						} // 制定列不参与排序
+					]
+				});
+				$('.table-sort tbody').on('click', 'tr', function() {
+					if($(this).hasClass('selected')) {
+						$(this).removeClass('selected');
+					} else {
+						table.$('tr.selected').removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
 			});
-			$('.table-sort tbody').on('click', 'tr', function() {
-				if($(this).hasClass('selected')) {
-					$(this).removeClass('selected');
-				} else {
-					table.$('tr.selected').removeClass('selected');
-					$(this).addClass('selected');
-				}
-			});
-
-			/*经销商-添加*/
-			function partner_add(title, url,w,h) {
+			/*提货记录-添加*/
+			function agency_add(title, url,w,h) {
 				layer_show(title, url, w, h);
 			}
-			/*经销商-编辑*/
-			function partner_edit(title, id) {
-				layer_show(title, '/partner-edit/'+id, '460', '500');
+			/*提货记录-编辑*/
+			function agency_edit(title, id) {
+				layer_show("编辑"+title+"提货记录", "/agency-edit/"+id, '800', '500');
 			}
 			/*经销商-查看*/
 			function partner_show(title, id) {
 				layer_show(title, '/partner/'+id, '460', '500');
 			}
-			/*用户-删除*/
+			/*提货记录-删除*/
 			function partner_del(obj, id) {
 				layer.confirm('确认要删除吗？', function(index) {
 					$.ajax({
-						url: "/partner/"+id,
+						url: "/agency/"+id,
 						type: "delete",
 						dataType: "json",
 						contentType: "application/json",

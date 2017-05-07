@@ -16,10 +16,12 @@
 	</head>
 <body>
 <div class="cl pd-20" style=" background-color:#5bacb6">
-  <img class="radius avatar size-XL l" src="../../static/h-ui/images/loading-b.gif" th:src="${partner.avatarFile}">
+  <img class="radius avatar size-XL l" src="../../static/h-ui/images/loading-b.gif" th:src="${partner.avatarFile}" />
   <dl style="margin-left:80px; color:#fff">
-    <dt><span class="f-18">张三</span> <span class="pl-10 f-12">等级：黄金</span></dt>
-    <dd class="pt-10 f-12" style="margin-left:0">备注：这家伙很懒，什么也没有留下</dd>
+    <dt><span class="f-18" th:text="${partner.name}">张三</span> <span class="pl-10 f-12">等级：黄金</span></dt>
+    <dd class="pt-10 f-12" style="margin-left:0" th:text="${partner.comment}">
+    	备注：这家伙很懒，什么也没有留下
+    </dd>
   </dl>
 </div>
 <div class="pd-20">
@@ -36,59 +38,55 @@
       </tr>
       <tr>
         <th class="text-left">行业：</th>
-        <td >IT/互联网</td>
-      </tr>
-      <tr>
-        <th class="text-left">职业：</th>
-        <td>工程师</td>
+        <td th:test="${partner.tradeId}">IT/互联网</td>
       </tr>
       <tr>
         <th class="text-left">职位：</th>
-        <td>初级</td>
+        <td th:text="${partner.function}">初级</td>
       </tr>
-      <tr>
+      <tr th:if="${partner.birthday} != null">
         <th class="text-left">生日：</th>
-        <td>1993年6月23日</td>
+        <td th:data="${#dates.format(partner.birthday, 'yyyy年MMM月dd日  HH:mm:ss')}">1993年6月23日</td>
       </tr>
       <tr>
         <th class="text-left">自我介绍：</th>
-        <td>Hello World</td>
+        <td th:text="${partner.signature}">Hello World</td>
       </tr>
       <tr>
         <th class="text-left">手机号：</th>
-        <td>18394489774</td>
+        <td th:text="${partner.mobile}">18394489774</td>
       </tr>
       <tr>
         <th class="text-left">邮箱：</th>
-        <td>lids@radacat.com</td>
+        <td th:text="${partner.email}">lids@radacat.com</td>
       </tr>
       <tr>
         <th class="text-left">办公电话：</th>
-        <td>17600223175</td>
+        <td th:text="${partner.phone}">17600223175</td>
       </tr>
       <tr>
         <th class="text-left">QQ：</th>
-        <td>1014875985</td>
+        <td th:text="${partner.qq}">1014875985</td>
       </tr>
       <tr>
         <th class="text-left">微博：</th>
-        <td>18394489774</td>
+        <td th:text="${partner.weibo}">18394489774</td>
       </tr>
       <tr>
         <th class="text-left">技能：</th>
-        <td>写代码</td>
+        <td th:text="${partner.skill}">写代码</td>
       </tr>
       <tr>
         <th class="text-left">爱好：</th>
-        <td>无</td>
+        <td th:text="${partner.interest}">无</td>
       </tr>
       <tr>
         <th class="text-left">语言：</th>
-        <td>中文</td>
+        <td th:text="${partner.lang}">中文</td>
       </tr>
       <tr>
         <th class="text-left">国家：</th>
-        <td>中国</td>
+        <td th:text="${partner.areaId}">中国</td>
       </tr>
       <tr>
         <th class="text-left">省：</th>
@@ -100,28 +98,28 @@
       </tr>
       <tr>
         <th class="text-left">详细街道：</th>
-        <td>朝阳区望京街道望京悠乐汇E座2702室</td>
+        <td th:text="${partner.street}">朝阳区望京街道望京悠乐汇E座2702室</td>
       </tr>
       <tr>
         <th class="text-left">邮编：</th>
-        <td>100000</td>
+        <td th:text="${partner.zip}">100000</td>
       </tr>
       <tr>
         <th class="text-left">公司名称：</th>
-        <td>北京蓝涟科技有限责任公司</td>
+        <td th:text="${partner.companyId}">北京蓝涟科技有限责任公司</td>
       </tr>
       <tr>
         <th class="text-left">注册时间：</th>
-        <td>2017年3月26日</td>
+        <td th:data="${#dates.format(partner.createDate, 'yyyy年MMM月dd日  HH:mm:ss')}">2017年3月26日</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th class="text-left">上次登录时间：</th>
         <td>2017年3月26日 15点38分</td>
       </tr>
       <tr>
         <th class="text-left">上次登录ip：</th>
         <td>192.168.0.1</td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
