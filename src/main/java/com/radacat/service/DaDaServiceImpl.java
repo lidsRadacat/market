@@ -2,6 +2,8 @@ package com.radacat.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.radacat.domain.Partner;
 
 /**
@@ -10,6 +12,7 @@ import com.radacat.domain.Partner;
  * @date: 2017年4月24日 下午9:11:06
  * @version: V1.0
  */
+@Service
 public class DaDaServiceImpl implements DaDaService{
 
 	@Override
@@ -21,5 +24,4 @@ public class DaDaServiceImpl implements DaDaService{
 	public List<Partner> findList(int pageNum, int pageSize) {
 		return null;
 	}
-
 }

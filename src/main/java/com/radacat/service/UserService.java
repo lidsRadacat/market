@@ -1,6 +1,7 @@
 package com.radacat.service;
 
 import com.radacat.domain.User;
+import com.radacat.vo.UserVo;
 
 /**
  * @Description: TODO
@@ -9,5 +10,6 @@ import com.radacat.domain.User;
  * @version: V1.0
  */
 public interface UserService {
-	public void add(User user);
+	void add(User user);
+	UserVo findUserVO(String username);
 }

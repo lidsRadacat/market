@@ -27,7 +27,7 @@ import com.radacat.service.ProductService;
  */
 @Controller
 @RequestMapping(value="/product")
-public class ProductController extends BaseConstructor{
+public class ProductController extends BaseController{
 	
 	@Autowired
 	ProductService productService;
@@ -87,5 +87,16 @@ public class ProductController extends BaseConstructor{
 		product.setId(id);
 		productService.start(product);
 		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping("/product-add")
+	public String addProduct(){
+		return "product/product-add";
+	}
+	
+	@RequestMapping("/product-edit/{id}")
+	public String editProduct(Model model,@PathVariable Long id){
+		model.addAttribute("product",productService.find(id));
+		return "product/product-edit";
 	}
 }

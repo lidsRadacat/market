@@ -3,6 +3,7 @@ package com.radacat.service;
 import java.util.List;
 
 import com.radacat.domain.Company;
+import com.radacat.vo.CompanyVo;
 
 
 /**
@@ -17,4 +18,5 @@ public interface CompanyService {
 	void update(Company company);
 	Company find(Company company);
 	List<Company> findList(int pageNum,int pageSize);
+	List<CompanyVo> findVoList(int pageNum,int pageSize);
 }

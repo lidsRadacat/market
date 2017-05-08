@@ -27,7 +27,7 @@ import com.radacat.vo.AgencyVo;
  */
 @Controller
 @RequestMapping(value="/agency")
-public class AgencyController extends BaseConstructor{
+public class AgencyController extends BaseController{
 	@Autowired
 	AgencyService agencyService;
 	
@@ -68,5 +68,16 @@ public class AgencyController extends BaseConstructor{
 		agency.setId(id);
 		agencyService.update(agency);
 		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping("/agency-add")
+	public String addAgency(){
+		return "partner/agency-add";
+	}
+	
+	@RequestMapping("/agency-edit/{id}")
+	public String editAgency(Model model,@PathVariable Long id){
+		model.addAttribute("agency",agencyService.find(id));
+		return "partner/agency-edit";
 	}
 }

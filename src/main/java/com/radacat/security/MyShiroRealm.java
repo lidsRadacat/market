@@ -1,5 +1,8 @@
 package com.radacat.security;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,8 +16,11 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.radacat.dao.UserRepository;
+import com.radacat.domain.Permission;
 import com.radacat.domain.User;
+import com.radacat.service.AdminService;
 import com.radacat.utils.LoggerUtil;
+import com.radacat.vo.AdminVo;
 
 /**
  * MyShiroRealm
@@ -23,6 +29,9 @@ public class MyShiroRealm extends AuthorizingRealm{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	/**
 	 * 权限认证，为当前登录的Subject授予角色和权限 
@@ -41,6 +50,14 @@ public class MyShiroRealm extends AuthorizingRealm{
 		if(user!=null){
 			//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）
 			SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
+			System.out.println(user);
+			AdminVo admin = adminService.find(user.getId());
+			if(admin.getUserRolePermission() != null){
+				info.addRole(admin.getUserRolePermission().getRole().getName());
+				for(Permission permission:admin.getUserRolePermission().getPermissions()){
+					info.addStringPermission(permission.getUrl());					
+				}
+			}
 			//用户的角色集合
 //			info.setRoles(user.getRolesName());
 			//用户的角色对应的所有权限，如果只使用角色定义访问权限，下面的四行可以不要

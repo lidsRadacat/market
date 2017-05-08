@@ -16,7 +16,6 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 
 import com.radacat.security.MyShiroRealm;
 import com.radacat.security.RetryLimitHashedCredentialsMatcher;
-import com.radacat.utils.LoggerUtil;
 
 /**
  * Shiro 配置
@@ -108,7 +107,7 @@ public class ShiroConfiguration {
 		// authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
 //		filterChainDefinitionMap.put("/user", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则
 		// anon：它对应的过滤器里面是空的,什么都没做
-		LoggerUtil.info("##################从数据库读取权限规则，加载到shiroFilter中##################");
+//		LoggerUtil.info("##################从数据库读取权限规则，加载到shiroFilter中##################");
 //		filterChainDefinitionMap.put("/user/edit/**", "authc,perms[user:edit]");// 这里为了测试，固定写死的值，也可以从数据库或其他配置中读取
 //		filterChainDefinitionMap.put("/login", "anon");
 		filterChainDefinitionMap.put("/**", "anon");//anon 可以理解为不拦截

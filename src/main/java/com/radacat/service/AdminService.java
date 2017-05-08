@@ -18,6 +18,6 @@ public interface AdminService {
 	void delete(Partner partner);
 	void update(Partner partner);
 	void update(AdminVo adminVo);
-	AdminVo find(Partner partner);
+	AdminVo find(Long id);
 	List<AdminVo> findList(int pageNum, int pageSize);
 }

@@ -8,13 +8,15 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.radacat.dao.UserRepository;
 import com.radacat.domain.Partner;
 import com.radacat.domain.User;
 import com.radacat.exception.MyRuntimeException;
 import com.radacat.mapper.UserMapper;
 import com.radacat.utils.IdWorker;
 import com.radacat.utils.ShiroPasswordHelper;
-import com.radacat.utils.StringUtils;
+import com.radacat.vo.AdminVo;
+import com.radacat.vo.UserVo;
 
 /**
  * @Description: TODO
@@ -36,6 +38,12 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	ShiroPasswordHelper shiroPasswordHelper;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	AdminService adminService;
 	
 	
 	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
@@ -65,5 +73,19 @@ public class UserServiceImpl implements UserService{
 		if (insert == 0) {
 			throw new MyRuntimeException("rollback insert user");
 		}
+	}
+
+
+	@Override
+	public UserVo findUserVO(String username) {
+    	User user = userRepository.findUserByLogin(username);
+    	AdminVo adminVo = adminService.find(user.getId());
+    	UserVo userVo = new UserVo();
+    	userVo.setUser(user);
+    	userVo.setPartner(adminVo.getPartner());
+    	userVo.setAddressVo(adminVo.getAddressVo());
+    	userVo.setPermissions(adminVo.getUserRolePermission()==null?null:adminVo.getUserRolePermission().getPermissions());
+    	userVo.setRole(adminVo.getUserRolePermission()==null?null:adminVo.getUserRolePermission().getRole());
+		return userVo;
 	}
 }

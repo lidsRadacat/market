@@ -2,6 +2,8 @@ package com.radacat.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.radacat.domain.Goal;
 
 /**
@@ -10,6 +12,7 @@ import com.radacat.domain.Goal;
  * @date: 2017年4月24日 下午8:55:35
  * @version: V1.0
  */
+@Service
 public class GoalServiceImpl implements GoalService{
 
 	@Override

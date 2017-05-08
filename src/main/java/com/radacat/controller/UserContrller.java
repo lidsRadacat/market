@@ -3,6 +3,7 @@ package com.radacat.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
  * @date: 2017年4月15日 下午1:41:19
  * @version: V1.0
  */
-@RestController
+@Controller
 public class UserContrller {
 	
 	@Autowired
@@ -81,5 +82,15 @@ public class UserContrller {
 		}else{
 			return new RestApi<>(StatusCode._40008.getCode());
 		}
+	}
+	
+	@RequestMapping("/register")
+	public String register(){
+		return "user/register";
+	}
+	
+	@RequestMapping(value="/login")
+	public String loginForm(){
+		return "user/login";
 	}
 }

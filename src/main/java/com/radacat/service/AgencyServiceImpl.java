@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +32,15 @@ public class AgencyServiceImpl implements AgencyService{
 
 	@Autowired
 	AgencyMapper agencyMapper;
-	
-	@Autowired
-	AreaMapper areaMapper;
-	
+
 	@Autowired
 	ProductMapper productMapper;
 	
 	@Autowired
-	CountryMapper countryMapper;
+	PartnerMapper partnerMapper;
 	
 	@Autowired
-	PartnerMapper partnerMapper;
+	AddressService addressService;
 	
 	@Autowired
 	IdWorker idWorker;
@@ -90,15 +88,8 @@ public class AgencyServiceImpl implements AgencyService{
 	private AgencyVo packageAgencyVo(Agency agency){
 		AgencyVo agencyVo = new AgencyVo();
 		Product product = productMapper.selectByPrimaryKey(agency.getProductId().longValue());
-		Area area = areaMapper.selectByPrimaryKey(agency.getAreaId());
 		Partner partner = partnerMapper.selectByPrimaryKey(agency.getCreateUid());
-		AddressVo addressVo = new AddressVo();
-		addressVo.setCountry(countryMapper.selectByPrimaryKey(area.getCountryId()).getName());
-		addressVo.setCity(area.getCity());
-		addressVo.setCounty(area.getCounty());
-		addressVo.setLatitude(area.getLatitude());
-		addressVo.setLongitude(area.getLongitude());
-		addressVo.setProvince(area.getProvince());
+		AddressVo addressVo = addressService.findAddressVo(agency.getAreaId());
 		agencyVo.setAreaId(agency.getAreaId());
 		agencyVo.setCreateDate(agency.getCreateDate());
 		agencyVo.setCreateUid(agency.getCreateUid());

@@ -98,12 +98,15 @@
 					<div class="formControls col-xs-8 col-sm-9">
 						<span class="select-box" style="width:150px;">
 							<select class="select" name="adminRole" size="1">
+		     						<option th:each="role,stat:${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+							</select>
+							<!-- <select class="select" name="adminRole" size="1">
 								<option value="0">超级管理员</option>
 								<option value="1">普通管理员</option>
 								<option value="2">客服小二</option>
 								<option value="3">普通员工</option>
 								<option value="4">参观人</option>
-							</select>
+							</select> -->
 						</span>
 					</div>
 				</div>
@@ -155,7 +158,7 @@
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-3">地址：</label>
-					<div class="formControls col-xs-8 col-sm-9" id=province>
+					<div class="formControls col-xs-8 col-sm-9" id="province">
 						
 					</div>
 				</div>
@@ -175,13 +178,16 @@
 					<label class="form-label col-xs-4 col-sm-3">公司：</label>
 					<div class="formControls col-xs-8 col-sm-9">
 						<span class="select-box" style="width:300px;">
-							<select class="select" name="adminRole" size="1">
+							<select class="select" name="company" size="1">
+		     						<option th:each="company,stat:${companys}" th:value="${company.id}" th:text="${company.name}"></option>
+							</select>
+							<!-- <select class="select" name="adminRole" size="1">
 								<option value="0">北京蓝涟科技有限责任公司</option>
 								<option value="1">radacat</option>
 								<option value="2">宝能中心</option>
 								<option value="3">方恒国际</option>
 								<option value="4">广发银行</option>
-							</select>
+							</select> -->
 						</span>
 					</div>
 				</div>

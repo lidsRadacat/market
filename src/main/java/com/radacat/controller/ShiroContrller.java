@@ -11,14 +11,15 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.radacat.api.RestApi;
 import com.radacat.api.StatusCode;
+import com.radacat.service.AdminService;
 import com.radacat.service.UserService;
 import com.radacat.utils.LoggerUtil;
 
@@ -29,11 +30,14 @@ import com.radacat.utils.LoggerUtil;
  * @date: 2017年4月15日 下午1:59:18
  * @version: V1.0
  */
-@RestController
-public class ShiroContrller {
+@Controller
+public class ShiroContrller extends BaseController{
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	AdminService adminService;
 	
 //	@ApiOperation(value="用户登录", notes="")
 //    @ApiImplicitParams({
@@ -43,6 +47,7 @@ public class ShiroContrller {
 //            @ApiImplicitParam(name = "validate", value="图片验证码",required = true,dataType = "String")
 //    })
 	@RequestMapping(value="/api/login",method=RequestMethod.POST,consumes="application/x-www-form-urlencoded",produces="application/json")
+	@ResponseBody
 	public RestApi<String> login(@RequestParam(value = "username", required = true) String username,
 			@RequestParam(value = "password", required = true) String password,
 			@RequestParam(value = "validate", required = true) String validate,
@@ -89,9 +94,10 @@ public class ShiroContrller {
         }
         //验证是否登录成功  
         if(currentUser.isAuthenticated()){
-        	LoggerUtil.info("用户[" + username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");  
+        	LoggerUtil.info("用户[" + username + "]登录认证通过(这里可以进行一些认证通过后的一些系统参数初始化操作)");
+        	setUser(session, userService.findUserVO(username));
             return new RestApi<>(StatusCode._20000.getCode());
-        }else{  
+        }else{
             token.clear();
             return new RestApi<>(StatusCode._10000.getCode(),StatusCode._10000.getMessage());
         }  
@@ -99,14 +105,16 @@ public class ShiroContrller {
 	
 //	@ApiOperation(value="用户退出", notes="")
 	@RequestMapping(value="/logout",method=RequestMethod.GET)  
-    public RestApi<String> logout(){ 
+    public String logout(HttpSession session){ 
 		//使用权限管理工具进行用户的退出，跳出登录，给出提示信息
+		removeUser(session);
         SecurityUtils.getSubject().logout();  
-        return new RestApi<>(StatusCode._20000.getMessage());
+        return "user/login";
     }
 	
 //	@ApiOperation(value="用户没有权限", notes="")
 	@RequestMapping("/403")
+	@ResponseBody
 	public RestApi<String> unauthorizedRole(){
 		LoggerUtil.info("------没有权限-------");
 		return new RestApi<>(StatusCode._40006.getCode(),StatusCode._40006.getMessage());

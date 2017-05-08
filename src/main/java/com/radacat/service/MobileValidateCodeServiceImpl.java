@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.radacat.exception.MyJsonCheckedException;
@@ -29,6 +30,7 @@ public class MobileValidateCodeServiceImpl implements MobileValidateCodeService{
     ValueOperations<String,String> valOpsStr;
 	
 	@Override
+	@Async
 	public void sendValidateCode(String mobile) throws MyJsonCheckedException {
 		String code = "";
 		try {
@@ -38,7 +40,6 @@ public class MobileValidateCodeServiceImpl implements MobileValidateCodeService{
 			e.printStackTrace();
 			throw new MyJsonCheckedException("alidayu api error");
 		}
-		
 	}
 
 	@Override

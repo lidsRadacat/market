@@ -35,7 +35,7 @@
 						<i class="Hui-iconfont">&#xe6e2;</i> 
 						批量删除
 					</a>
-					<a class="btn btn-primary radius" onclick="partner_add('添加经销商','/partner-add','800','500')" href="javascript:;">
+					<a class="btn btn-primary radius" onclick="partner_add('添加经销商','/partner/partner-add','800','500')" href="javascript:;">
 						<i class="Hui-iconfont">&#xe600;</i> 添加经销商
 					</a>
 				</span>
@@ -124,7 +124,7 @@
 			}
 			/*经销商-编辑*/
 			function partner_edit(title, id) {
-				layer_show(title, '/partner-edit/'+id, '460', '500');
+				layer_show(title, '/partner/partner-edit/'+id, '460', '500');
 			}
 			/*经销商-查看*/
 			function partner_show(title, id) {
@@ -139,7 +139,6 @@
 						dataType: "json",
 						contentType: "application/json",
 						success : function(msg) {
-							alert("删除成功");
 							$(obj).parents("tr").remove();
 							layer.msg('已删除!', {
 								icon: 1,

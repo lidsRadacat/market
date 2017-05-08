@@ -12,18 +12,21 @@ import com.radacat.dto.UserRolePermission;
  * @version: V1.0
  */
 public class AdminVo implements Serializable{	
-	/**
-	 * serialVersionUID
-	 * long
-	 */
 	private static final long serialVersionUID = 6887640890734863655L;
 	private Partner partner;
+	private AddressVo addressVo;
 	private UserRolePermission userRolePermission;
 	public Partner getPartner() {
 		return partner;
 	}
 	public void setPartner(Partner partner) {
 		this.partner = partner;
+	}
+	public AddressVo getAddressVo() {
+		return addressVo;
+	}
+	public void setAddressVo(AddressVo addressVo) {
+		this.addressVo = addressVo;
 	}
 	public UserRolePermission getUserRolePermission() {
 		return userRolePermission;
@@ -33,6 +36,7 @@ public class AdminVo implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "AdminVo [partner=" + partner + ", userRolePermission=" + userRolePermission + "]";
+		return "AdminVo [partner=" + partner + ", addressVo=" + addressVo + ", userRolePermission=" + userRolePermission
+				+ "]";
 	}
 }

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.radacat.api.RestApi;
 import com.radacat.api.StatusCode;
-import com.radacat.domain.Agency;
-import com.radacat.domain.Area;
+import com.radacat.domain.Company;
 import com.radacat.domain.Partner;
+import com.radacat.domain.Role;
 import com.radacat.service.AdminService;
+import com.radacat.service.CompanyService;
+import com.radacat.service.RoleService;
 import com.radacat.vo.AdminVo;
-import com.radacat.vo.AgencyVo;
-
-import io.swagger.annotations.ApiOperation;
 
 /**
  * @Description: TODO
@@ -38,6 +36,12 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
+	@Autowired
+	RoleService roleService;
+	
+	@Autowired
+	CompanyService companyService;
+	
 //	@ApiOperation(value="显示管理员列表", notes="")
     @RequestMapping(value="/{pageNum}/{pageSize}", method=RequestMethod.GET)
 	public String getAdminList(@PathVariable int pageNum, 
@@ -50,7 +54,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public String getAdmin(Model model,@PathVariable Long id){
-		model.addAttribute("agencyVo",adminService.find(new Partner(id)));
+		model.addAttribute("agencyVo",adminService.find(id));
 		return "admin/admin-show";
 	}
 	
@@ -76,5 +80,24 @@ public class AdminController {
 		adminVo.getPartner().setId(id);
 		adminService.update(adminVo);
 		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping("/admin-add")
+	public String addAdmin(Model model){
+		List<Role> roles = roleService.findList();
+		List<Company> companys = companyService.findList(0, 100);
+		model.addAttribute("roles", roles);
+		model.addAttribute("companys",companys);
+		return "admin/admin-add";
+	}
+	
+	@RequestMapping("/admin-edit/{id}")
+	public String editAdmin(Model model,@PathVariable Long id){
+		model.addAttribute("admin",adminService.find(id));
+		List<Role> roles = roleService.findList();
+		List<Company> companys = companyService.findList(0, 100);
+		model.addAttribute("roles", roles);
+		model.addAttribute("companys",companys);
+		return "admin/admin-edit";
 	}
 }

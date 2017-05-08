@@ -26,7 +26,7 @@ import com.radacat.service.PartnerService;
  */
 @Controller
 @RequestMapping(value="/partner")
-public class partnerController extends BaseConstructor{
+public class partnerController extends BaseController{
 	
 	@Autowired
 	PartnerService partnerService;
@@ -69,5 +69,16 @@ public class partnerController extends BaseConstructor{
 		partner.setId(id);
 		partnerService.update(partner);
 		return new RestApi<>(StatusCode._20000.getCode());
+	}
+	
+	@RequestMapping("/partner-add")
+	public String addPartner(){
+		return "partner/partner-add";
+	}
+	
+	@RequestMapping("/partner-edit/{id}")
+	public String editPartner(Model model,@PathVariable Long id){
+		model.addAttribute("product",partnerService.find(id));
+		return "partner/partner-edit";
 	}
 }

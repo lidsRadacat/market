@@ -12,10 +12,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.PlatformTransactionManager;
 
 @SpringBootApplication
 @MapperScan("com.radacat.mapper")
+@EnableAsync
 public class MarketApplication {
 	protected static Logger logger=LoggerFactory.getLogger(MarketApplication.class);
 

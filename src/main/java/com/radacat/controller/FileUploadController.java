@@ -30,7 +30,7 @@ import com.radacat.service.UploadFileService;
  */
 @Controller
 @RequestMapping(value = "/file")
-public class FileUploadController extends BaseConstructor{
+public class FileUploadController extends BaseController{
 	 
 	@Autowired
 	UploadFileService uploadFileService;

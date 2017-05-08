@@ -1,7 +1,5 @@
 package com.radacat.mapper;
 
-import org.apache.ibatis.annotations.Update;
-
 import com.radacat.domain.Product;
 
 public interface ProductMapper {

@@ -16,6 +16,7 @@ import com.radacat.dto.UserRolePermission;
 import com.radacat.mapper.PartnerMapper;
 import com.radacat.mapper.RoleMapper;
 import com.radacat.mapper.UserRoleMapper;
+import com.radacat.vo.AddressVo;
 import com.radacat.vo.AdminVo;
 
 /**
@@ -35,6 +36,9 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Autowired
 	RoleMapper roleMapper;
+	
+	@Autowired
+	AddressService AddressService;
 	
 	@Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
 	@Override
@@ -80,9 +84,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public AdminVo find(Partner partner) {
-		Partner admin = partnerMapper.selectByPrimaryKey(partner.getId());
-		UserRolePermission userRolePermission = userRoleMapper.findUserRolePermission(partner.getId());
+	public AdminVo find(Long id) {
+		Partner admin = partnerMapper.selectByPrimaryKey(id);
+		UserRolePermission userRolePermission = userRoleMapper.findUserRolePermission(id);
 		AdminVo adminVo = new AdminVo();
 		adminVo.setPartner(admin);
 		adminVo.setUserRolePermission(userRolePermission);
@@ -96,9 +100,11 @@ public class AdminServiceImpl implements AdminService{
 		List<AdminVo> adminVos = new ArrayList<AdminVo>();
 		for (Partner admin : admins) {
 			UserRolePermission userRolePermission = userRoleMapper.findUserRolePermission(admin.getId());
+			AddressVo addressVo = AddressService.findAddressVo(admin.getAreaId());
 			AdminVo adminVo = new AdminVo();
 			adminVo.setUserRolePermission(userRolePermission);
 			adminVo.setPartner(admin);
+			adminVo.setAddressVo(addressVo);
 			adminVos.add(adminVo);
 		}
 		return adminVos;

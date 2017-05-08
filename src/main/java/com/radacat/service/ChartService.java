@@ -5,6 +5,6 @@ package com.radacat.service;
  * @date: 2017年4月15日 下午2:30:20
  * @version: V1.0
  */
-public interface CharService {
+public interface ChartService {
 
 }
