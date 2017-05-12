@@ -1,13 +1,13 @@
 package com.radacat.service;
 
-import java.util.Date;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.radacat.domain.UploadFile;
-import com.radacat.mapper.UploadFileMapper;
-import com.radacat.utils.IdWorker;
+import com.radacat.state.FileUploadContext;
 
 /**
  * @Description: TODO
@@ -17,18 +17,16 @@ import com.radacat.utils.IdWorker;
  */
 @Service
 public class UploadFileServiceImpl implements UploadFileService{
+	
+	@Autowired
+	FileUploadContext fileUploadContext;
 
-	@Autowired
-	UploadFileMapper uploadFileMapper;
-	
-	@Autowired
-	IdWorker idWorker;
-	
 	@Override
-	public void add(UploadFile uploadFile) {
-		uploadFile.setId(idWorker.nextId());
-		uploadFile.setCreateDate(new Date());
-		uploadFile.setWriteDate(new Date());
-		uploadFileMapper.insert(uploadFile);
+	public String saveFile(UploadFile uploadFile,MultipartFile file,String realpath) throws IllegalStateException, IOException{
+		uploadFile.setUrl(realpath);
+		fileUploadContext.contextUploedFile(uploadFile, file);
+		return uploadFile.getUrl().substring(realpath.length()+1,uploadFile.getUrl().length()).replace("\\", "//");
 	}
+	
+	
 }

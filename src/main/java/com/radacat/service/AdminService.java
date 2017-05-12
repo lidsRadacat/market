@@ -2,8 +2,8 @@ package com.radacat.service;
 
 import java.util.List;
 
-import com.radacat.domain.Area;
 import com.radacat.domain.Partner;
+import com.radacat.dto.UserInfo;
 import com.radacat.vo.AdminVo;
 
 /**
@@ -15,6 +15,7 @@ import com.radacat.vo.AdminVo;
 public interface AdminService {
 	void add(Partner partner);
 	void add(AdminVo adminVo);
+	void add(UserInfo userInfo);
 	void delete(Partner partner);
 	void update(Partner partner);
 	void update(AdminVo adminVo);

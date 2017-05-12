@@ -40,5 +40,4 @@ public abstract class BaseController {
 	public void removeUser(HttpSession session){
 		session.removeAttribute("userVo");
 	}
-		
 }

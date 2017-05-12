@@ -123,12 +123,12 @@
 			function agency_edit(title, id) {
 				layer_show("编辑"+title+"提货记录", "/agency/agency-edit/"+id, '800', '500');
 			}
-			/*经销商-查看*/
+			/*提货记录-查看*/
 			function partner_show(title, id) {
-				layer_show(title, '/partner/'+id, '460', '500');
+				layer_show(title, '/agency/'+id, '460', '500');
 			}
 			/*提货记录-删除*/
-			function partner_del(obj, id) {
+			function agency_del(obj, id) {
 				layer.confirm('确认要删除吗？', function(index) {
 					$.ajax({
 						url: "/agency/"+id,

@@ -1,5 +1,9 @@
 package com.radacat.service;
 
+import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.radacat.domain.UploadFile;
 
 /**
@@ -9,5 +13,5 @@ import com.radacat.domain.UploadFile;
  * @version: V1.0
  */
 public interface UploadFileService {
-	void add(UploadFile uploadFile);
+	String saveFile(UploadFile uploadFile,MultipartFile file,String realpath) throws IllegalStateException, IOException;
 }

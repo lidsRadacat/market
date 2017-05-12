@@ -1,20 +1,35 @@
-﻿/**
- * jQuery :  城市联动插件
- * @author   XiaoDong <cssrain@gmail.com>
- *			 http://www.cssrain.cn
- * @example  $("#test").ProvinceCity();
- * @params   暂无
- */
+﻿//$(function() {
+//	
+//})
 $.fn.ProvinceCity = function(){
+	$.ajax({
+		url: "/area",
+		type: "get",
+		dataType: "json",
+		contentType: "application/json",
+		success : function(data) {
+			GP = data.result.province;
+//			console.log(GP)
+			GT = data.result.city;
+//			console.log(GT)
+			GC = data.result.county;
+//			console.log(GC)
+			console.log(data);
+		},
+		error: function(errs) {
+			alert(errs.responseText);
+        }
+	});
+	
 	var _self = this;
 	//定义3个默认值
 	_self.data("province",["请选择", "请选择"]);
 	_self.data("city1",["请选择", "请选择"]);
 	_self.data("city2",["请选择", "请选择"]);
 	//插入3个空的下拉框
-	_self.append("<span class='select-box' style='width:150px;'><select class='select' name='provice' size='1'></select></span>");
-	_self.append("<span class='select-box' style='width:150px;'><select class='select' name='city' size='1'></select></span>");
-	_self.append("<span class='select-box' style='width:150px;'><select class='select' name='county' size='1'></select></span>");
+	_self.append("<span class='select-box' style='width:150px;'><select class='select' id='provice' name='provice' size='1'></select></span>");
+	_self.append("<span class='select-box' style='width:150px;'><select class='select' id='city' name='city' size='1'></select></span>");
+	_self.append("<span class='select-box' style='width:150px;'><select class='select' id='county' name='county' size='1'></select></span>");
 	//分别获取3个下拉框
 	var $sel1 = _self.find("select").eq(0);
 	var $sel2 = _self.find("select").eq(1);
@@ -53,7 +68,9 @@ $.fn.ProvinceCity = function(){
 				$sel2.append("<option value='"+data+"'>"+data+"</option>");
 			});
 			$.each( GC[index1-1][0] , function(index,data){
-				$sel3.append("<option value='"+data+"'>"+data+"</option>");
+				var county=data.split(";")[0];
+				var id = data.split(";")[1];
+				$sel3.append("<option value='"+id+"'>"+county+"</option>");
 			})
 		}
 	}).change();
@@ -63,7 +80,9 @@ $.fn.ProvinceCity = function(){
 		$sel3[0].options.length=0;
 		index2 = this.selectedIndex;
 		$.each( GC[index1-1][index2] , function(index,data){
-			$sel3.append("<option value='"+data+"'>"+data+"</option>");
+			var county=data.split(";")[0];
+			var id = data.split(";")[1];
+			$sel3.append("<option value='"+id+"'>"+county+"</option>");
 		})
 	});
 	return _self;

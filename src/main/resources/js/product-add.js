@@ -777,10 +777,17 @@ $("#form-product-add").validate({
 			}),
 			success : function(data) {
 				//要执行的代码
-				alert("添加成功");
+//				alert("添加成功");
 //				window.location.reload();
 //				opener.location.reload();
-				layer_close();
+				layer.msg('添加成功!', {
+					icon: 1,
+					time: 2000
+				});
+				window.setTimeout("layer_close();",2000);
+//				var index = parent.layer.getFrameIndex(window.name);
+//				parent.$('.btn-refresh').click();
+//				parent.layer.close(index);
 			},
 			error: function(errs) {
 				alert(errs.responseText);

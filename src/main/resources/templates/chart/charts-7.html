@@ -13,12 +13,16 @@
 		<link rel="stylesheet" type="text/css" href="../../lib/icheck/icheck.css" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/style.css" />
-		<title>3D饼状图</title>
+		<title>中国各城市的销售额</title>
 	</head>
 
 	<body>
-		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 统计管理 <span class="c-gray en">&gt;</span> 3D饼状图
-			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+			<span class="c-gray en">&gt;</span> 统计管理 
+			<span class="c-gray en">&gt;</span> 中国各城市的销售额
+			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
+				<i class="Hui-iconfont">&#xe68f;</i>
+			</a>
 		</nav>
 		<div class="page-container">
 			<div id="container" style="min-width:700px;height:400px"></div>
@@ -42,7 +46,7 @@
 						}
 					},
 					title: {
-						text: 'Browser market shares at a specific website, 2014'
+						text: '中国各城市的销售额, 2017'
 					},
 					tooltip: {
 						pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -60,18 +64,18 @@
 					},
 					series: [{
 						type: 'pie',
-						name: 'Browser share',
+						name: '销售量',
 						data: [
-							['Firefox', 45.0],
-							['IE', 26.8], {
-								name: 'Chrome',
+							['广州', 45.0],
+							['上海', 26.8], {
+								name: '北京',
 								y: 12.8,
 								sliced: true,
 								selected: true
 							},
-							['Safari', 8.5],
-							['Opera', 6.2],
-							['Others', 0.7]
+							['杭州', 8.5],
+							['天津', 6.2],
+							['成都', 0.7]
 						]
 					}]
 				});

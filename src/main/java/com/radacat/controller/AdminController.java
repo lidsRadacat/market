@@ -18,6 +18,7 @@ import com.radacat.api.StatusCode;
 import com.radacat.domain.Company;
 import com.radacat.domain.Partner;
 import com.radacat.domain.Role;
+import com.radacat.dto.UserInfo;
 import com.radacat.service.AdminService;
 import com.radacat.service.CompanyService;
 import com.radacat.service.RoleService;
@@ -60,9 +61,9 @@ public class AdminController {
 	
 	@RequestMapping(value="",method=RequestMethod.POST,consumes="application/json",produces="application/json")
 	@ResponseBody
-	public RestApi<String> addAdmin(@RequestBody AdminVo adminVo,HttpServletRequest request){
-		System.out.println(adminVo);
-		adminService.add(adminVo);
+	public RestApi<String> addAdmin(@RequestBody UserInfo userInfo,HttpServletRequest request){
+//		System.out.println(userInfo);
+		adminService.add(userInfo);
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 	

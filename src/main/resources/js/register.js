@@ -80,18 +80,17 @@ $(function() {
 					//要执行的代码
 					if(data.code === '20000'){
 						var second = 3;
+						layer.msg('注册成功! '+second+'后跳转到登录页面......', {
+							icon: 1,
+							time: 3000
+						});
 						var Timer = window.setInterval(function() {
-							layer.msg('注册成功! '+second+'后跳转到登录页面......', {
-								icon: 1,
-								time: 1000
-							});
 							second -= 1;
 							if (second == 0) {
 								clearInterval(Timer);
 								location.href = "login";								
 							}
 						}, 1000);
-						alert("注册成功");
 					}else{
 						alert("未知异常")
 					}
