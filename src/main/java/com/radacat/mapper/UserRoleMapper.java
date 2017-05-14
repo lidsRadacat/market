@@ -1,7 +1,5 @@
 package com.radacat.mapper;
 
-import java.util.List;
-
 import com.radacat.domain.UserRole;
 import com.radacat.domain.UserRoleKey;
 import com.radacat.dto.UserRolePermission;

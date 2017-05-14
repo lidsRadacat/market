@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 	<head>
 		<meta charset="utf-8" />
 		<meta name="renderer" content="webkit|ie-comp|ie-stand" />
@@ -63,7 +62,7 @@
 										<a href="#">个人信息</a>
 									</li>
 									<li>
-										<a href="/login">切换账户</a>
+										<a href="/logout">切换账户</a>
 									</li>
 									<li>
 										<a href="/logout">退出</a>
@@ -71,8 +70,24 @@
 								</ul>
 							</li>
 							
-							<li id="Hui-msg">
-								<a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a>
+							<li id="Hui-msg" class="dropDown right dropDown_hover">
+								<a href="#" title="消息"><span class="badge badge-danger">2</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a>
+								<ul class="dropDown-menu menu radius box-shadow">
+									<li>
+										<span class="badge badge-danger">1</span>
+										<a href="javascript:;">
+											<strong>张三</strong>&nbsp;&nbsp;&nbsp;
+											<small>2017/6/1 11:22:11</small>
+										</a>
+									</li>
+									<li>
+										<span class="badge badge-danger">1</span>
+										<a href="javascript:;">
+											<strong>李四</strong>&nbsp;&nbsp;&nbsp;
+											<small>2017/6/1 11:22:11</small>									
+										</a>
+									</li>
+								</ul>
 							</li>
 							<li id="Hui-skin" class="dropDown right dropDown_hover">
 								<a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
@@ -113,19 +128,23 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/partner/1/200" data-title="经销商管理" href="javascript:void(0)">经销商管理</a>
+								<a data-href="/partner/1/200" data-title="经销商管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe6cc;</i>
+								经销商管理</a>
 							</li>
 							<li>
-								<a data-href="/agency/1/200" data-title="提货记录管理" href="javascript:void(0)">提货记录管理</a>
+								<a data-href="/agency/1/200" data-title="提货记录管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe669;</i>
+								提货记录管理</a>
 							</li>
 						</ul>
 					</dd>
 				</dl>
-				<dl id="menu-dada">
+				<!-- <dl id="menu-dada">
 					<dt>
 				<i class="Hui-iconfont">&#xe60d;</i> 哒哒会员管理
 				<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-			</dt>
+				</dt>
 					<dd>
 						<ul>
 							<li>
@@ -139,22 +158,26 @@
 							</li>
 						</ul>
 					</dd>
-				</dl>
+				</dl> -->
 				<dl id="menu-points">
 					<dt><i class="Hui-iconfont">&#xe6b5;</i> 积分管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/points/partner-scoreoperation.html" data-title="经销商积分管理" href="javascript:void(0)">经销商积分管理</a>
+								<a data-href="/points/1/200" data-title="经销商积分管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe6b4;</i>
+								经销商积分</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a data-href="/points/dada-scoreoperation.html" data-title="哒哒积分管理" href="javascript:;">哒哒积分管理</a>
 							</li>
 							<li>
 								<a data-href="/points/level.html" data-title="等级管理" href="javascript:;">等级管理</a>
-							</li>
+							</li> -->
 							<li>
-								<a data-href="/points/history.html" data-title="积分历史" href="javascript:;">积分历史</a>
+								<a data-href="/history-points/1/200" data-title="历史积分" href="javascript:;">
+								<i class="Hui-iconfont">&#xe632;</i>
+								历史积分</a>
 							</li>
 						</ul>
 					</dd>
@@ -164,7 +187,9 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/product" data-title="产品管理" href="javascript:void(0)">产品管理</a>
+								<a data-href="/product" data-title="产品管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe6c6;</i>
+								产品管理</a>
 							</li>
 						</ul>
 					</dd>
@@ -174,7 +199,9 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/company/company.html" data-title="公司管理" href="javascript:void(0)">公司管理</a>
+								<a data-href="/company/1/200" data-title="公司管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe643;</i>
+								公司管理</a>
 							</li>
 						</ul>
 					</dd>
@@ -184,26 +211,41 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/market/opportunity.html" data-title="销售机会" href="javascript:void(0)">销售机会</a>
+								<a data-href="/opportunity/1/200" data-title="销售机会" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe648;</i>								
+								销售机会</a>
 							</li>
 							<li>
-								<a data-href="/market/competitor.html" data-title="竞争对手" href="javascript:void(0)">竞争对手</a>
+								<a data-href="/competitor/1/200" data-title="竞争对手" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe66e;</i>								
+								竞争对手</a>
+							</li>
+							<li>
+								<a data-href="/activity/1/200" data-title="营销活动" href="javascript:;">
+								<i class="Hui-iconfont">&#xe693;</i>								
+								营销活动</a>
 							</li>
 						</ul>
 					</dd>
 				</dl>
 				<dl id="menu-goal">
-					<dt><i class="Hui-iconfont">&#xe622;</i> 目标管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe679;</i> 目标管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/goal/person.html" data-title="个人目标" href="javascript:void(0)">个人目标</a>
+								<a data-href="/goal-person/1/200" data-title="个人目标" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe627;</i>								
+								个人目标</a>
 							</li>
 							<li>
-								<a data-href="/goal/depart.html" data-title="部门目标" href="javascript:void(0)">部门目标</a>
+								<a data-href="/goal-depart/1/200" data-title="部门目标" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe625;</i>								
+								部门目标</a>
 							</li>
 							<li>
-								<a data-href="/goal/company.html" data-title="公司目标" href="javascript:void(0)">公司目标</a>
+								<a data-href="/goal-company/1/200" data-title="公司目标" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe616;</i>								
+								公司目标</a>
 							</li>
 						</ul>
 					</dd>
@@ -213,50 +255,51 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/admin/1/200" data-title="管理员列表" href="javascript:void(0)">管理员列表</a>
+								<a data-href="/admin/1/200" data-title="管理员列表" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe62b;</i>								
+								管理员列表</a>
 							</li>
 							<li>
-								<a data-href="/permission" data-title="权限管理" href="javascript:void(0)">权限管理</a>
+								<a data-href="/permission/1/200" data-title="权限管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe638;</i>								
+								权限管理</a>
 							</li>
 							<li>
-								<a data-href="/role" data-title="角色管理" href="javascript:void(0)">角色管理</a>
+								<a data-href="/role/1/200" data-title="角色管理" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe70d;</i>								
+								角色管理</a>
 							</li>
 						</ul>
 					</dd>
 				</dl>
 				<dl id="menu-chart">
-					<dt><i class="Hui-iconfont">&#xe61a;</i> 图表统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+					<dt><i class="Hui-iconfont">&#xe635;</i> 图表统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/chart/charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a>
+								<a data-href="/chart/china" data-title="中国主要城市的销售额" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe621;</i>								
+								中国一线城市销售额</a>
 							</li>
 							<li>
-								<a data-href="/chart/charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a>
+								<a data-href="/chart/chinaMap" data-title="中国各地销售额地图" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe61e;</i>								
+								中国城市销量地地图</a>
 							</li>
 							<li>
-								<a data-href="/chart/charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a>
+								<a data-href="/chart/global" data-title="全球销售额" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe621;</i>								
+								全球个大洲销售额</a>
 							</li>
 							<li>
-								<a data-href="/chart/charts-4.html" data-title="柱状图" href="javascript:void(0)">柱状图</a>
+								<a data-href="/chart/monthly" data-title="每月销售额" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe61a;</i>								
+								每月销售额</a>
 							</li>
 							<li>
-								<a data-href="/chart/charts-5.html" data-title="饼状图" href="javascript:void(0)">饼状图</a>
-							</li>
-							<li>
-								<a data-href="/chart/charts-6.html" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a>
-							</li>
-							<li>
-								<a data-href="/chart/charts-7.html" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a>
-							</li>
-							<li>
-								<a data-href="/chart/chinaCitySales1.html" data-title="中国个省市销售图1" href="javascript:void(0)">中国个省市销售图1</a>
-							</li>
-							<li>
-								<a data-href="/chart/chinaCitySales2.html" data-title="中国个省市销售图2" href="javascript:void(0)">中国个省市销售图2</a>
-							</li>
-							<li>
-								<a data-href="/chart/chinaCitySales3.html" data-title="中国个省市销售图1" href="javascript:void(0)">中国个省市销售图3</a>
+								<a data-href="/chart/top10" data-title="销售排行榜Top 10" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe6cf;</i>								
+								销售排行榜Top 10</a>
 							</li>
 						</ul>
 					</dd>
@@ -266,16 +309,24 @@
 					<dd>
 						<ul>
 							<li>
-								<a data-href="/system/system-base.html" data-title="系统参数信息" href="javascript:void(0)">系统参数信息</a>
+								<a data-href="/dada-delete/1/200" data-title="删除的会员" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe6e2;</i>								
+								删除的会员</a>
 							</li>
 							<li>
-								<a data-href="/system/data-dictionary.html" data-title="数据字典" href="javascript:void(0)">数据字典</a>
+								<a data-href="/dictionary-list/1/200" data-title="数据字典" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe68b;</i>								
+								数据字典</a>
 							</li>
 							<li>
-								<a data-href="/system/login-log.html" data-title="用户登录日志" href="javascript:void(0)">用户登录日志</a>
+								<a data-href="/login-log-list/1/200" data-title="用户登录日志" href="javascript:void(0)">
+								<i class="Hui-iconfont">&#xe623;</i>								
+								用户登录日志</a>
 							</li>
 							<li>
-								<a data-href="/system/dada-delete-list.html" data-title="删除的会员" href="javascript:;">删除的会员</a>
+								<a data-href="/feedback-list/1/200" data-title="意见建议" href="javascript:;">
+								<i class="Hui-iconfont">&#xe70c;</i>								
+								意见建议</a>
 							</li>
 						</ul>
 					</dd>
@@ -285,7 +336,7 @@
 		<div class="dislpayArrow hidden-xs">
 			<a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a>
 		</div>
-		<section class="Hui-article-box">
+		<section class="Hui-article-box"> 
 			<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
 				<div class="Hui-tabNav-wp">
 					<ul id="min_title_list" class="acrossTab cl">

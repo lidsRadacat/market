@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/webuploader/0.1.5/webuploader.css" />
-		<title>添加管理员 - 管理员管理</title>
+		<title>编辑管理员 - 管理员管理</title>
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 	</head>
@@ -221,62 +221,6 @@
 		<script type="text/javascript" src="../../lib/provincesCity/jquery.provincesCity.js"></script>
 		<script type="text/javascript" src="../../lib/provincesCity/provincesData.js"></script>
 		<!--请在下方写此页面业务相关的脚本-->
-		<script type="text/javascript">
-			$(function() {
-				$("#province").ProvinceCity();
-				
-				$('.skin-minimal input').iCheck({
-					checkboxClass: 'icheckbox-blue',
-					radioClass: 'iradio-blue',
-					increaseArea: '20%'
-				});
-
-				$("#form-admin-add").validate({
-					rules: {
-						login:{
-							required:true,
-						},
-						adminName: {
-							required: true,
-							minlength: 4,
-							maxlength: 16,
-						},
-						password: {
-							required: true,
-							isPassword:true,
-						},
-						password2: {
-							required: true,
-							equalTo: "#password"
-						},
-						sex: {
-							required: true,
-						},
-						phone: {
-							required: true,
-							isPhone: true,
-						},
-						email: {
-							required: true,
-							email: true,
-						},
-						adminRole: {
-							required: true,
-						},
-					},
-					onkeyup: false,
-					focusCleanup: true,
-					success: "valid",
-					submitHandler: function(form) {
-						$(form).ajaxSubmit();
-						var index = parent.layer.getFrameIndex(window.name);
-						parent.$('.btn-refresh').click();
-						parent.layer.close(index);
-					}
-				});
-			});
-		</script>
-		<script type="text/javascript" src="../../js/fileUpload.js"></script>
+		<script type="text/javascript" src="../../js/admin/admin-edit.js"></script>
 	</body>
-
 </html>

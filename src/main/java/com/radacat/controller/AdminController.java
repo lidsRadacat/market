@@ -32,7 +32,7 @@ import com.radacat.vo.AdminVo;
  */
 @Controller
 @RequestMapping(value = "/admin")
-public class AdminController {
+public class AdminController extends BaseController{
 	
 	@Autowired
 	AdminService adminService;
@@ -62,21 +62,20 @@ public class AdminController {
 	@RequestMapping(value="",method=RequestMethod.POST,consumes="application/json",produces="application/json")
 	@ResponseBody
 	public RestApi<String> addAdmin(@RequestBody UserInfo userInfo,HttpServletRequest request){
-//		System.out.println(userInfo);
 		adminService.add(userInfo);
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
 	@ResponseBody
-	public RestApi<String> deleteProduct(@PathVariable Long id){
+	public RestApi<String> deleteAdmin(@PathVariable Long id){
 		adminService.delete(new Partner(id));
 		return new RestApi<>(StatusCode._20000.getCode());
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	@ResponseBody
-	public RestApi<String> updateProduct(@PathVariable Long id,
+	public RestApi<String> updateAdmin(@PathVariable Long id,
 			@RequestBody AdminVo adminVo){
 		adminVo.getPartner().setId(id);
 		adminService.update(adminVo);
@@ -100,5 +99,10 @@ public class AdminController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("companys",companys);
 		return "admin/admin-edit";
+	}
+	
+	@RequestMapping("/admin-edit-pwd/{id}")
+	public String changePassword(Model model,@PathVariable Long id){
+		return "admin/change-password";
 	}
 }
