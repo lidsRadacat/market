@@ -32,7 +32,7 @@
 					<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 						<i class="Hui-iconfont">&#xe6e2;</i> 
 						批量删除
-					</a> 
+					</a>
 				</span>
 				<span class="r">共有数据：
 					<strong id="total">88</strong> 条
@@ -103,44 +103,7 @@
 						$(this).addClass('selected');
 					}
 				});
-			});
-//			$(function() {
-//				$.ajax({
-//					type: "GET",
-//					url: "http://" + ip + "/bcat/user/userPage.do?pageNo="
-//					success: function(date) {
-//						//console.log(date);
-//						var html = "";
-//						$.each(date.result.userList, function(i, value) {
-//							//序号 字符串 转 数字
-//							var pageNo = parseInt(date.result.pageNo);
-//							var iNum = parseInt(i);
-//							html += `
-//		                       <tr class="text-c">
-//		                            <td><input type="checkbox" value="${value。id}" name="${value。id}" onclick="checkSel(this)"/></td>
-//		                            <td>${i}</td>
-//		                            <td><u style="cursor:pointer;text-decoration:underline" class="text-primary" onclick="member_show('"+${value.name}+"','partner-show.html','"+${value.id}+""','360','400')">${value.name}</u></td>
-//		                            <td>${value.gender}</td>
-//		                            <td>${value.mobile}</td>
-//		                            <td>${value.email}</td>
-//		                            <td>${value.userAddress}</td>
-//		                            <td>${value.registerTime}</td>
-//		                            <td>${value.QQ}</td>
-//		                            <td class="td-manage">
-//		                                <a title="删除" style="text-decoration:none" onclick="partner_del(this,"+${value.id}+")" class="ml-5" href="javascript:;">
-//		                                    <i class="Hui-iconfont">&#xe6e2;</i>
-//		                                </a>
-//		                            </td>
-//		                        </tr>
-//              			`;
-//						});
-//						/*插入所有用户*/
-//						$("#tbody").html(html);
-//						/* 总数量 */
-//						$("#total").html(date.result.total);
-//					}
-//				});
-//			});		
+			});	
 			/*用户-查看*/
 			function partner_show(title, url, id, w, h) {
 				layer_show(title, url, w, h);

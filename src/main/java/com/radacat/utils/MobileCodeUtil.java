@@ -7,8 +7,8 @@ import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
 import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
 
 /** 
-* <p>开发公司：蓝涟科技  <p>
-* <p>版权所有：蓝涟科技  <p>
+* <p>开发公司：XX科技  <p>
+* <p>版权所有：XX科技  <p>
 * <p>地址：www.radacat.com <p>
 * <p>责任人	李大双   <p> 
 *		

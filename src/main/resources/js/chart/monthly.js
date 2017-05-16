@@ -1,7 +1,7 @@
 $(function() {
 	$('#container').highcharts({
 		title: {
-			text: '蓝涟科技各产品每月销售额统计'
+			text: 'XX科技各产品每月销售额统计'
 		},
 		xAxis: {
 			categories: ['一月', '二月', '三月', '四月', '五月']
